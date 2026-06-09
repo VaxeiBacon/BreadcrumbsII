@@ -76,7 +76,7 @@ export default function Landing() {
             <img src={logotipo} alt="Logotipo de la empresa" className="brand-logo company-logo" />
           </div>
           <nav className="nav">
-            <a href="#discover">Descubre San Luis</a>
+            <a href="#discover">Descubre</a>
             <a href="#gallery">Galería</a>
             <a href="#contact">Contacto</a>
           </nav>
