@@ -3,6 +3,9 @@ import Landing from './Landing'
 import Places from './Places'
 import Gastronomy from './Gastronomy'
 import Lodging from './Lodging'
+import Error404 from './Error404'
+import Error403 from './Error403'
+import LoginAdmin from './LoginAdmin'
 
 // Mapeamos las rutas basadas en la estructura hash: #/Inicio/Descubrir/interfaz
 const routes = {
@@ -11,6 +14,9 @@ const routes = {
   '/inicio/descubrir/places': Places,
   '/inicio/descubrir/gastronomy': Gastronomy,
   '/inicio/descubrir/lodging': Lodging,
+  '/error/404': Error404,
+  '/error/403': Error403,
+  '/admin/login': LoginAdmin,
 }
 
 function getRoute() {

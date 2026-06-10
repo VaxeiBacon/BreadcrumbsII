@@ -82,6 +82,17 @@ html {
   transform: scale(1.05);
 }
 
+.logo-link {
+  display: flex;
+  align-items: center;
+  transition: transform 220ms ease;
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
 .company-logo {
   height: 48px;
 }

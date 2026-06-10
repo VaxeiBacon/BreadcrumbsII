@@ -72,7 +72,9 @@ export default function Landing() {
       <header className="site-header">
         <div className="container header-inner">
             <div className="places-logo-group">
-            <img src={slrcLogo} alt="San Luis Río Colorado" className="brand-logo slrc-logo" />
+            <a href="#/inicio/descubrir" className="logo-link">
+              <img src={slrcLogo} alt="San Luis Río Colorado" className="brand-logo slrc-logo" />
+            </a>
             <img src={logotipo} alt="Logotipo de la empresa" className="brand-logo company-logo" />
           </div>
           <nav className="nav">
