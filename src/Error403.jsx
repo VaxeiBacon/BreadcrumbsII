@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom' // <--- 1. Importamos el componente oficial de enlaces
 import './error.css'
 import slrcLogo from './assets/SLRCLogo.webp'
 import logotipo from './assets/logotipoempresa.png'
@@ -9,9 +10,10 @@ export default function Error403() {
       <header className="error-header">
         <div className="error-header-inner">
           <div className="error-logo-group">
-            <a href="#/inicio/descubrir" className="logo-link">
+            {/* 2. Cambiamos 'a href' por 'Link to' sin el símbolo '#' */}
+            <Link to="/inicio/descubrir" className="logo-link">
               <img src={slrcLogo} alt="San Luis Río Colorado" className="error-brand-logo" />
-            </a>
+            </Link>
             <img src={logotipo} alt="Logotipo de la empresa" className="error-brand-logo company-logo" />
           </div>
         </div>
@@ -25,12 +27,13 @@ export default function Error403() {
             No tienes permisos para acceder a este recurso. Si crees que esto es un error, contacta con el administrador.
           </p>
           <div className="error-actions">
-            <a href="#/inicio/descubrir" className="error-btn error-btn-primary">
+            {/* 3. Limpiamos también los botones de acción principales */}
+            <Link to="/inicio/descubrir" className="error-btn error-btn-primary">
               Volver al Inicio
-            </a>
-            <a href="#/inicio/descubrir/places" className="error-btn error-btn-secondary">
+            </Link>
+            <Link to="/inicio/descubrir/places" className="error-btn error-btn-secondary">
               Explorar Lugares
-            </a>
+            </Link>
           </div>
         </div>
 

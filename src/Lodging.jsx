@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom' // <--- 1. Importación esencial para la navegación limpia
 import Breadcrumbs from './Breadcrumbs'
 import logotipo from './assets/logotipoempresa.png'
 import slrcLogo from './assets/SLRCLogo.webp'
@@ -16,7 +17,7 @@ const hotels = [
   },
   {
     title: 'Hotel Mirra',
-    subtitle: 'Hospedaje acogedor con comodidades pensadas para tu descanso.',
+    subtitle: 'Hospedaje acojedor con comodidades pensadas para tu descanso.',
     image: 'https://images.trvl-media.com/lodging/17000000/16720000/16713300/16713210/20df2030.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill',
   },
   {
@@ -42,15 +43,17 @@ export default function Lodging() {
       <header className="places-header">
         <div className="places-header-inner">
           <div className="places-logo-group">
-            <a href="#/inicio/descubrir" className="logo-link">
+            {/* 2. Limpieza del enlace del logo */}
+            <Link to="/inicio/descubrir" className="logo-link">
               <img src={slrcLogo} alt="San Luis Río Colorado" className="brand-logo slrc-logo" />
-            </a>
+            </Link>
             <img src={logotipo} alt="Logotipo de la empresa" className="brand-logo company-logo" />
           </div>
+          {/* 3. Limpieza de las pestañas del submenú superior */}
           <nav className="places-nav">
-            <a href="#/inicio/descubrir">Inicio</a>
-            <a href="#/inicio/descubrir/gastronomy">Gastronomía</a>
-            <a href="#/inicio/descubrir/places">Lugares</a>
+            <Link to="/inicio/descubrir">Inicio</Link>
+            <Link to="/inicio/descubrir/gastronomy">Gastronomía</Link>
+            <Link to="/inicio/descubrir/places">Lugares</Link>
           </nav>
         </div>
       </header>
@@ -64,7 +67,6 @@ export default function Lodging() {
         </div>
       </section>
 
-      {/* Insertado exactamente debajo del Hero */}
       <Breadcrumbs />
 
       <main className="places-main container" id="hospedaje">
@@ -79,7 +81,8 @@ export default function Lodging() {
               <div className="place-card-content">
                 <h3>{hotel.title}</h3>
                 <p>{hotel.subtitle}</p>
-                <a className="btn place-cta" href="#contact">Más detalles</a>
+                {/* 4. Redirección limpia al bloque de contacto de la landing */}
+                <Link className="btn place-cta" to="/inicio/descubrir#contact">Más detalles</Link>
               </div>
             </article>
           ))}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom' // <--- 1. Importación obligatoria del componente oficial
 import Breadcrumbs from './Breadcrumbs'
 import './landing.css'
 import hero from './assets/hero.jpg'
@@ -71,12 +72,14 @@ export default function Landing() {
     <div className="landing" id="top">
       <header className="site-header">
         <div className="container header-inner">
-            <div className="places-logo-group">
-            <a href="#/inicio/descubrir" className="logo-link">
+          <div className="places-logo-group">
+            {/* 2. Cambiamos el link del logo a una ruta limpia */}
+            <Link to="/inicio/descubrir" className="logo-link">
               <img src={slrcLogo} alt="San Luis Río Colorado" className="brand-logo slrc-logo" />
-            </a>
+            </Link>
             <img src={logotipo} alt="Logotipo de la empresa" className="brand-logo company-logo" />
           </div>
+          {/* 3. Los anclajes con '#' se quedan igual porque se mueven dentro de este mismo archivo */}
           <nav className="nav">
             <a href="#discover">Descubre</a>
             <a href="#gallery">Galería</a>
@@ -127,10 +130,8 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Breadcrumbs en la Landing */}
         <Breadcrumbs />
 
-        {/* Sección Descubrir centrada */}
         <div className="section-header" style={{ textAlign: 'center', margin: '40px 0 20px', display: 'block' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#111', margin: '0 0 10px', letterSpacing: '-0.02em' }}>Descubrir</h2>
           <p style={{ color: '#5f6b75', fontSize: '1.1rem', margin: '0 0 10px', fontWeight: '500' }}>Conoce lo mejor de San Luis Río Colorado</p>
@@ -147,7 +148,8 @@ export default function Landing() {
             <h3>Lugares para visitar</h3>
             <p>Paseos por el río, pesca y eventos culturales durante todo el año.</p>
             <div className="feature-actions">
-              <a className="btn" href="#/inicio/descubrir/places">Ver lugares</a>
+              {/* 4. Cambiamos los botones de las tarjetas por componentes <Link> limpios */}
+              <Link className="btn" to="/inicio/descubrir/places">Ver lugares</Link>
             </div>
           </article>
           <article className="reveal">
@@ -157,7 +159,7 @@ export default function Landing() {
             <h3>Gastronomía</h3>
             <p>Sabores locales y restaurantes familiares con tradición.</p>
             <div className="feature-actions">
-              <a className="btn" href="#/inicio/descubrir/gastronomy">Ver gastronomía</a>
+              <Link className="btn" to="/inicio/descubrir/gastronomy">Ver gastronomía</Link>
             </div>
           </article>
           <article className="reveal">
@@ -167,12 +169,11 @@ export default function Landing() {
             <h3>Alojamiento</h3>
             <p>Opciones para todos los presupuestos: boutique, hoteles y camping.</p>
             <div className="feature-actions">
-              <a className="btn" href="#/inicio/descubrir/lodging">Ver hospedaje</a>
+              <Link className="btn" to="/inicio/descubrir/lodging">Ver hospedaje</Link>
             </div>
           </article>
         </section>
 
-        {/* Sección Galería centrada */}
         <section id="gallery" className="gallery container">
           <div className="gallery-header" style={{ display: 'block', textAlign: 'center', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#111', margin: '0', letterSpacing: '-0.02em' }}>Galería</h2>
@@ -192,8 +193,6 @@ export default function Landing() {
                 onClick={galleryPrev} 
                 aria-label="Anterior" 
                 style={{ pointerEvents: 'auto', background: 'rgba(0,0,0,0.45)', color: '#fff', border: 'none', width: '44px', height: '44px', borderRadius: '999px', fontSize: '24px', cursor: 'pointer', display: 'grid', placeItems: 'center', transition: 'background 220ms' }}
-                onMouseEnter={(e) => e.target.style.background = 'rgba(0,0,0,0.65)'}
-                onMouseLeave={(e) => e.target.style.background = 'rgba(0,0,0,0.45)'}
               >
                 ‹
               </button>
@@ -201,8 +200,6 @@ export default function Landing() {
                 onClick={galleryNext} 
                 aria-label="Siguiente" 
                 style={{ pointerEvents: 'auto', background: 'rgba(0,0,0,0.45)', color: '#fff', border: 'none', width: '44px', height: '44px', borderRadius: '999px', fontSize: '24px', cursor: 'pointer', display: 'grid', placeItems: 'center', transition: 'background 220ms' }}
-                onMouseEnter={(e) => e.target.style.background = 'rgba(0,0,0,0.65)'}
-                onMouseLeave={(e) => e.target.style.background = 'rgba(0,0,0,0.45)'}
               >
                 ›
               </button>
@@ -221,7 +218,6 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Sección Contacto con el título unificado e igualado en jerarquía */}
         <section id="contact" className="contact container" style={{ textAlign: 'center' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#111', margin: '0 0 16px', letterSpacing: '-0.02em' }}>Contacto</h2>
           <p style={{ color: '#5f6b75', maxWidth: '650px', margin: '0 auto 24px', lineHeight: '1.75' }}>

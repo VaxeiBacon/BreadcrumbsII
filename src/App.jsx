@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Landing from './Landing'
 import Places from './Places'
 import Gastronomy from './Gastronomy'
@@ -7,49 +8,29 @@ import Error404 from './Error404'
 import Error403 from './Error403'
 import LoginAdmin from './LoginAdmin'
 
-// Mapeamos las rutas basadas en la estructura hash: #/Inicio/Descubrir/interfaz
-const routes = {
-  'home': Landing,
-  '/inicio/descubrir': Landing,
-  '/inicio/descubrir/places': Places,
-  '/inicio/descubrir/gastronomy': Gastronomy,
-  '/inicio/descubrir/lodging': Lodging,
-  '/error/404': Error404,
-  '/error/403': Error403,
-  '/admin/login': LoginAdmin,
+export default function App() {
+  return (
+    <Routes>
+      {/* 1. RUTAS OFICIALES (Llimpias y sin el #) */}
+      <Route path="/" element={<Landing />} />
+      <Route path="/inicio/descubrir" element={<Landing />} />
+      <Route path="/inicio/descubrir/places" element={<Places />} />
+      <Route path="/inicio/descubrir/gastronomy" element={<Gastronomy />} />
+      <Route path="/inicio/descubrir/lodging" element={<Lodging />} />
+      
+      {/* Rutas administrativas y de error */}
+      <Route path="/admin/login" element={<LoginAdmin />} />
+      <Route path="/403" element={<Error403 />} />
+
+      {/* 2. SOPORTE PARA ENLACES VIEJOS (Redirecciones automáticas) */}
+      {/* Si alguien entra a /places o /lugares, se le mueve elegantemente al nuevo formato */}
+      <Route path="/places" element={<Navigate to="/inicio/descubrir/places" replace />} />
+      <Route path="/lugares" element={<Navigate to="/inicio/descubrir/places" replace />} />
+      <Route path="/gastronomia" element={<Navigate to="/inicio/descubrir/gastronomy" replace />} />
+      <Route path="/hospedaje" element={<Navigate to="/inicio/descubrir/lodging" replace />} />
+
+      {/* 3. CAPTURA UNIVERSAL DE 404 (Cualquier ruta no registrada arriba) */}
+      <Route path="*" element={<Error404 />} />
+    </Routes>
+  )
 }
-
-function getRoute() {
-  const rawHash = window.location.hash.slice(1) // Quitamos el '#'
-  const hash = decodeURIComponent(rawHash).toLowerCase()
-
-  // Si no hay hash, o apunta a secciones internas antiguos, mandamos a la landing principal
-  if (!hash || hash === 'top' || hash === 'discover' || hash === 'gallery' || hash === 'contact') {
-    return '/inicio/descubrir'
-  }
-
-  // Soporte por si diste clic en un enlace viejo de tipo antiguo (#lugares, #gastronomia, #hospedaje)
-  if (hash === 'lugares' || hash === 'places') return '/inicio/descubrir/places'
-  if (hash === 'gastronomia' || hash === 'gastronomía') return '/inicio/descubrir/gastronomy'
-  if (hash === 'hospedaje' || hash === 'lodging') return '/inicio/descubrir/lodging'
-
-  return routes[hash] ? hash : '/inicio/descubrir'
-}
-
-function App() {
-  const [route, setRoute] = useState(getRoute())
-
-  useEffect(() => {
-    const onHashChange = () => setRoute(getRoute())
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
-  }, [])
-
-  // Si la ruta actual es la landing pero trae un anclaje antiguo de sección,
-  // permitimos que cargue la Landing component normalmente
-  const Page = routes[route] || Landing
-  
-  return <Page />
-}
-
-export default App

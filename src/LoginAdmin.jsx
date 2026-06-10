@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom' // <--- 1. Importaciones oficiales para rutas y navegación
 import './admin.css'
 import slrcLogo from './assets/SLRCLogo.webp'
 import logotipo from './assets/logotipoempresa.png'
@@ -9,6 +10,8 @@ export default function LoginAdmin() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  
+  const navigate = useNavigate() // <--- 2. Inicialización del hook de navegación programática
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -38,7 +41,9 @@ export default function LoginAdmin() {
 
       // Aquí iría la lógica de autenticación real
       console.log('Intento de login:', { email, password })
-      // window.location.hash = '#/admin/dashboard'
+      
+      // 3. Redirección limpia al dashboard administrativo usando la API de React Router
+      navigate('/admin/dashboard')
       
       setIsLoading(false)
     }, 800)
@@ -49,9 +54,10 @@ export default function LoginAdmin() {
       <header className="admin-header">
         <div className="admin-header-inner">
           <div className="admin-logo-group">
-            <a href="#/inicio/descubrir" className="logo-link">
+            {/* 4. Enlace del logo limpio */}
+            <Link to="/inicio/descubrir" className="logo-link">
               <img src={slrcLogo} alt="San Luis Río Colorado" className="admin-brand-logo" />
-            </a>
+            </Link>
             <img src={logotipo} alt="Logotipo de la empresa" className="admin-brand-logo company-logo" />
           </div>
           <div className="admin-badge">Panel de Administración</div>
@@ -122,7 +128,8 @@ export default function LoginAdmin() {
             </form>
 
             <div className="login-footer">
-              <p>¿Problemas para acceder? <a href="#/inicio/descubrir">Contacta soporte</a></p>
+              {/* 5. Enlace inferior limpio hacia el inicio */}
+              <p>¿Problemas para acceder? <Link to="/inicio/descubrir">Contacta soporte</Link></p>
             </div>
           </div>
 
@@ -139,7 +146,7 @@ export default function LoginAdmin() {
       </main>
 
       <footer className="admin-footer">
-        <p>&copy; 2025 San Luis Río Colorado Turismo. Todos los derechos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} San Luis Río Colorado Turismo. Todos los derechos reservados.</p>
       </footer>
     </div>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom' // <--- 1. Importamos Link de forma obligatoria
 import Breadcrumbs from './Breadcrumbs'
 import logotipo from './assets/logotipoempresa.png'
 import slrcLogo from './assets/SLRCLogo.webp'
@@ -43,15 +44,17 @@ export default function Gastronomy() {
       <header className="places-header">
         <div className="places-header-inner">
           <div className="places-logo-group">
-            <a href="#/inicio/descubrir" className="logo-link">
+            {/* 2. Cambiamos el enlace del logo */}
+            <Link to="/inicio/descubrir" className="logo-link">
               <img src={slrcLogo} alt="San Luis Río Colorado" className="brand-logo slrc-logo" />
-            </a>
+            </Link>
             <img src={logotipo} alt="Logotipo de la empresa" className="brand-logo company-logo" />
           </div>
+          {/* 3. Cambiamos el menú de navegación principal por Links limpios */}
           <nav className="places-nav">
-            <a href="#/inicio/descubrir">Inicio</a>
-            <a href="#/inicio/descubrir/places">Lugares</a>
-            <a href="#/inicio/descubrir/lodging">Hospedaje</a>
+            <Link to="/inicio/descubrir">Inicio</Link>
+            <Link to="/inicio/descubrir/places">Lugares</Link>
+            <Link to="/inicio/descubrir/lodging">Hospedaje</Link>
           </nav>
         </div>
       </header>
@@ -65,7 +68,6 @@ export default function Gastronomy() {
         </div>
       </section>
 
-      {/* Insertado exactamente debajo del Hero */}
       <Breadcrumbs />
 
       <main className="places-main container" id="gastronomia">
@@ -80,7 +82,8 @@ export default function Gastronomy() {
               <div className="place-card-content">
                 <h3>{restaurant.title}</h3>
                 <p>{restaurant.subtitle}</p>
-                <a className="btn place-cta" href="#contact">Más detalles</a>
+                {/* 4. Cambiamos el botón interno a la sección de contacto de la landing */}
+                <Link className="btn place-cta" to="/inicio/descubrir#contact">Más detalles</Link>
               </div>
             </article>
           ))}
